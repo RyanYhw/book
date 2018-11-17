@@ -2,7 +2,7 @@
 
 [folly](https://github.com/facebook/folly)
 
-## 编译
+## compile
 
 ```
 gcc 4.9+
@@ -32,21 +32,16 @@ sudo apt-get install \
     libelf-dev \
     libdwarf-dev
 
-boost 最好是通过libboost-all-dev安装, 如果是自己编译的, cmake可能会对高版本的boost报错
-
 mkdir _build && cd _build
   cmake ..
   make -j $(nproc)
   make install
 
-默认生成为静态库
 ```
 
-## 使用
+## USE
 
-### 链接
-
-以下是必备的
+### LINK
 
 ```
 -std=c++14  -lfolly -pthread -lglog -lunwind   -levent -ldouble-conversion -lboost_context   -ldl  -liberty
