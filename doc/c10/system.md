@@ -9,7 +9,7 @@
 如 echo 2000000 > /proc/sys/fs/file-max
 ```
 
-### 修改当前进程的最大文件句柄数
+### 修改当前进程的最大文件句柄数
 
 ```
 可以修改 
@@ -39,7 +39,7 @@ pthread_attr_init
 # 有些参数需要根据系统的实际情况设置，不可以认为是固化的值
 
 # 允许将TIME_WAIT状态的socket重新用于新的TCP链接
-net.ipv4.tcp_tw_reuse = 1 
+net.ipv4.tcp_tw_reuse = 1
 
 # 当keepalive启动时，TCP发送keepalive消息的频度；默认是2小时，将其设置为10分钟
 ner.ipv4.tcp_keepalive_time = 600
