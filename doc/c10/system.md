@@ -6,7 +6,10 @@
 
 ```
 /proc/sys/fs/file-max 
+/proc/sys/fs/nr_open
 如 echo 2000000 > /proc/sys/fs/file-max
+   echo 2000000 > /proc/sys/fs/nr_open
+   
 ```
 
 ### 修改当前进程的最大文件句柄数
@@ -36,13 +39,18 @@ pthread_attr_init
 ```
 /etc/sysctl.conf
 /sbin/sysctl -p 生效
+
+# 如果想查看系统默认值
+# /sbin/sysctl -a
+# 或者 在文件中查找, 通常都在 /proc/sys/net/... 中
+
 # 有些参数需要根据系统的实际情况设置，不可以认为是固化的值
 
 # 允许将TIME_WAIT状态的socket重新用于新的TCP链接
 net.ipv4.tcp_tw_reuse = 1
 
 # 当keepalive启动时，TCP发送keepalive消息的频度；默认是2小时，将其设置为10分钟
-ner.ipv4.tcp_keepalive_time = 600
+net.ipv4.tcp_keepalive_time = 600
 
 # 当服务器主动关闭链接时，socket保持在FIN_WAIT_2状态的最大时间
 net.ipv4.tcp_fin_timeout = 30
@@ -79,7 +87,7 @@ net.ipv4.tcp_syncookies = 1
 
 # 这个参数表示TCP三次握手建立阶段接受SYN请求列队的最大长度，默认1024,
 # 将其设置的大一些可以使出现Nginx繁忙来不及accept新连接的情况时，Linux不至于丢失客户端发起的链接请求。
-net.ipv4.tcp_max_syn_backlog = 8192
+net.ipv4.tcp_max_syn_backlog = 20000
 
 # 这个参数用于设置启用timewait快速回收。线上环境不建议使用，尤其是在有NAT环境下
 # 如果发现客户端带时间戳的包无法建立连接的话，考虑是否开启了这个选项
@@ -97,7 +105,13 @@ net.core.somaxconn=8196
 
 net.ipv4.tcp_max_orphans=262114
 
+# 修改nf_conntrack的连接跟踪数
+# 如果有防火墙开启的话, 需要关注下这个参数
+net.nf_conntrack_max = 1000000
 ```
+
+这些参数可以在测试的时候，根据 dmesg输出的信息，进行合理的调整
+
 
 ## interupts
 
