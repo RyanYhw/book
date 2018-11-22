@@ -16,3 +16,6 @@
 
 mpstat -P ALL 2
 ```
+
+## ss
+

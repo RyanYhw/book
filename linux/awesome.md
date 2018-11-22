@@ -5,7 +5,7 @@
 查看网络状态
 ```
 netstat -n | awk '/^tcp/ {++S[$NF]} END {for(a in S) print a, S[a]}'
-netstat 可以使用ss代替
+ss -a | awk '/^tcp/ {++S[$2]} END {for(a in S) print a, S[a]}'
 ```
 
 thrift 文件夹的批量处理
