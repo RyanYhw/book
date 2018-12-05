@@ -13,3 +13,9 @@ thrift 文件夹的批量处理
 ```
 ls -l | grep -v ^d |awk '{cmd = "thrift --gen go "$9; system(cmd)}'
 ```
+
+获取当前运行进程的快照, 用于生成core文件，做后续的分析
+
+```
+gcore -a -o fileName pid
+```
