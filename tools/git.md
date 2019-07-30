@@ -15,9 +15,7 @@
  git config --global credential.helper store
 ```
 
-
 ## 使用
-
 
 1.  如何查看特定分支的提交记录
 
@@ -27,9 +25,12 @@ git log <branch>
 
 2.  如何回退到特定的版本
 
+本地之前提交的数据会被删除, 需要做好备份
 ```
-git reset --hard <commit>  
-git push -f origin <branch> 
+// HEAD 指向最新的提交, HEAD^ 上一次提交, 
+// HEAD^^ 上上次提交(以此类推), 也可以写为 HEAD~2
+git reset --hard HEAD^
+git push -f origin <branch>
 ```
 
 
